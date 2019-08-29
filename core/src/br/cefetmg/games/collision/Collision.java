@@ -38,4 +38,14 @@ public class Collision {
         boolean exp2 =  (r1.y <= (r2.y + r2.height)) && ((r1.y + r1.height) >= r2.y);
         return exp1 && exp2;
     }
+    
+    public static final boolean recCircOverlap (Rectangle r1, Circle c1) {
+        Vector2 vecD = new Vector2 (c1.x - (r1.x - r1.width/2), c1.y - (r1.y - r1.height/2));
+        vecD = vecD.clamp(r1.width/2, r1.height/2);
+        
+        Vector2 point = new Vector2(r1.x + vecD.x + r1.width/2, r1.y + vecD.y + r1.height/2);
+        Vector2 distancePointCircle = new Vector2(point.x - c1.x, point.y - c1.y);
+        
+        return distancePointCircle.x*distancePointCircle.x + distancePointCircle.y*distancePointCircle.y <= c1.radius*c1.radius;
+    }
 }
